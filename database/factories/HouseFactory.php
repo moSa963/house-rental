@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\House;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,7 +19,7 @@ class HouseFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::all()->random()->id,
+            'user_id' => 0,
             'name' => $this->faker->name(),
             'country' => $this->faker->country(),
             'city' => $this->faker->city(),
@@ -30,5 +31,15 @@ class HouseFactory extends Factory
             'active' => true,
             'about' => $this->faker->paragraph(2),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterMaking(function (House $house) {
+            if ($house->user_id == 0)
+            {
+                $house->user_id = User::factory()->create()->id;
+            }
+        });
     }
 }

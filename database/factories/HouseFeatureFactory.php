@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\House;
+use App\Models\HouseFeature;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,8 +19,18 @@ class HouseFeatureFactory extends Factory
     public function definition()
     {
         return [
-            'house_id' => House::all()->random()->id,
+            'house_id' => 0,
             'feature' => $this->faker->sentence(),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterMaking(function (HouseFeature $house_feature) {
+            if ($house_feature->house_id == 0)
+            {
+                $house_feature->house_id = House::factory()->create()->id;
+            }
+        });
     }
 }
