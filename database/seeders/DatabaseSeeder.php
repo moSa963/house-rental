@@ -19,6 +19,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        Storage::deleteDirectory("house/images");
+        Storage::createDirectory("house/images");
 
+        $admin = User::factory()->create([ "username" => "admin" ]);
+
+        $houses = House::factory(5)->create([ "user_id" => $admin->id ]);
+
+        foreach($houses as $house)
+        {
+            HouseImage::factory(2)->create([ "house_id" => $house->id ]);
+            HouseRule::factory(5)->create([ "house_id" => $house->id ]);
+            HouseFeature::factory(5)->create([ "house_id" => $house->id ]);
+        }
+
+        $houses = House::factory(5)->create();
+
+        foreach($houses as $house)
+        {
+            HouseImage::factory(2)->create([ "house_id" => $house->id ]);
+            HouseRule::factory(5)->create([ "house_id" => $house->id ]);
+            HouseFeature::factory(5)->create([ "house_id" => $house->id ]);
+        }
     }
 }
