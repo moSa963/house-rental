@@ -3,7 +3,14 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\House;
+use App\Models\HouseFeature;
+use App\Models\HouseImage;
+use App\Models\HouseRule;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +19,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(UserSeeder::class);
-        $this->call(HouseSeeder::class);
-        $this->call(HouseImageSeeder::class);
-        $this->call(HouseRuleSeeder::class);
-        $this->call(HouseFeatureSeeder::class);
-        $this->call(HouseReviewSeeder::class);
+
     }
 }
