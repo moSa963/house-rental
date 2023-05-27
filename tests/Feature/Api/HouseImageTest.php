@@ -26,7 +26,9 @@ class HouseImageTest extends TestCase
 
         $response = $this->get('/api/house/'.$house->id."/image/".$image->id);
 
-        $response->assertStatus(302);
+        $response->assertSuccessful();
+
+        Storage::delete($image->name);
     }
 
     public function test_user_can_upload_house_images()
@@ -70,5 +72,7 @@ class HouseImageTest extends TestCase
         $response = $this->delete('/api/house/'.$house->id.'/image/'.$image->id);
 
         $response->assertSuccessful();
+
+        Storage::delete($image->name);
     }
 }
