@@ -20,7 +20,7 @@ class HouseCollection extends JsonResource
             'about' => $this->about,
             "user" => new UserResource($this->user),
             "images" => HouseImageResource::collection($this->images()->limit(5)->get()),
-            "reviews_avg" => $this->reviews()->avg("rating"),
+            "reviews_avg" => $this->reviews_avg_rating,
         ];
     }
 }

@@ -42,6 +42,8 @@ class HouseListService
             $houses = $houses->join("users", "users.id", "=", "houses.user_id")->where("users.username", $this->username);
         }
 
+        $houses->withAvg('reviews', 'rating')->orderByDesc('reviews_avg_rating');
+
         return $houses->simplePaginate(10)->withQueryString();
     }
 
