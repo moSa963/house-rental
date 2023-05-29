@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             HouseRule::factory(5)->create([ "house_id" => $house->id ]);
             HouseFeature::factory(5)->create([ "house_id" => $house->id ]);
             HouseReview::factory(5)->create([ "house_id" => $house->id ]);
+            Contract::factory()->create([ "house_id" => $house->id,  ]);
         }
 
         $houses = House::factory(5)->create();
@@ -46,11 +47,6 @@ class DatabaseSeeder extends Seeder
             HouseReview::factory(5)->create([ "house_id" => $house->id ]);
         }
 
-        $houses = House::factory(5)->create();
-
-        foreach($houses as $house)
-        {
-            Contract::factory()->create([ "house_id" => $house->id ]);
-        }
+        Contract::factory(5)->create([ "user_id" => $admin->id,  ]);
     }
 }
