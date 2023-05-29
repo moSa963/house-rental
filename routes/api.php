@@ -33,7 +33,7 @@ Route::controller(UserController::class)
     ->group(function () {
         Route::get("/user/{user:username}/image", "image"); //get the user profile image
         Route::get("/user", "create")->middleware("auth:sanctum"); //get the logged in user information
-        Route::post("/user", "update"); //update user info
+        Route::post("/user", "update")->middleware("auth:sanctum"); //update user info
     });
 
 Route::controller(HouseController::class)
