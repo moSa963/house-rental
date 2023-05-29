@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,12 +16,8 @@ class UserController extends Controller
        return $request->user();
     }
 
-    public function update(Request $request){
-        $user = $request->user();
-
-        if (isset($request->image)){
-            Storage::putFileAs('users', $request->image, $user->username);
-        }
+    public function update(UpdateUserRequest $request){
+        $request->update();
 
         return response()->noContent();
     }
